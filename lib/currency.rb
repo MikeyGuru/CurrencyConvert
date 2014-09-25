@@ -1,3 +1,6 @@
+class DifferentCurrencyCodeError <RuntimeError
+end
+
 class Currency
   include Comparable
   attr_reader :amount, :code
@@ -9,18 +12,35 @@ class Currency
   end
   def <=>(money_to_compare)
     if @code == money_to_compare.code
-      @value <=> money_to_compare.amount
+      @amount <=> money_to_compare.amount
     else
       return nil
     end
   end
-  
 
-  def usd(amount, code)
-    usd_value = []
-    usd_input = gets.chomp.to_i
-    usd_value << usd_input
+  def add_money(*money_to_add)
+    if @code = money_to_add.code
+      @amount += money_to_add.amount
+    else
+      return nil
+    end
   end
+  def sub_money(*money_to_sub)
+    if @code = money_to_sub.code
+      @amount -= money_to_sub.amount
+    else
+      return nil
+    end
+  end
+  def multi_money(*money_to_multi)
+    if @code = money_to_multi.code
+      @amount *= money_to_multi.amount
+    else
+      return nil
+    end
+  end
+
+end
 
 
   # def amount
@@ -38,17 +58,16 @@ class Currency
   # def code=(value)
   #   @code = value
   # end
-end
 
-money = Currency.new(20, :USD)
-p money.amount
-
-money_amount = gets.chomp.to_i
-money.amount=(money_amount)
-p money.amount
-
-wallet = Currency.new(100, :GBP)
-p wallet.code
-
-wallet.code=(money.code)
-p wallet.code
+# money = Currency.new(20, :USD)
+# p money.amount
+#
+# money_amount = gets.chomp.to_i
+# money.amount=(money_amount)
+# p money.amount
+#
+# wallet = Currency.new(100, :GBP)
+# p wallet.code
+#
+# wallet.code=(money.code)
+# p wallet.code
